@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="campaignmonitor" translate="label" sortOrder="100">
+            <label>Campaign Monitor</label>
+        </tab>
+        <section id="createsend_general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>General</label>
+            <tab>campaignmonitor</tab>
+            <resource>Luma_Campaignmonitor::general</resource>
+            <group id="api" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                <label>API</label>
+                <field id="api_key" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Key</label>
+                    <comment><![CDATA[You can find your client's API key <a href="https://help.campaignmonitor.com/api-keys" target="_blank">here</a>]]></comment>
+                </field>
+                <field id="api_client_id" translate="label comment" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client ID</label>
+                    <comment><![CDATA[You can find your client's ID <a href="https://help.campaignmonitor.com/classic-transactional-emails#api" target="_blank">here</a>]]></comment>
+                </field>
+                <field id="list_id" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select a List</label>
+                    <source_model>Luma\Campaignmonitor\Model\Config\ListSelection</source_model>
+                    <comment><![CDATA[The Campaign Monitor subscriber list your Magento users will subscribe to or unsubscribe from.]]></comment>
+                </field>                
+            </group>
+            <group id="advanced" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                <label>Advanced</label>
+                <field id="api_test_button" translate="label comment" type="button" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Test API</label>
+                    <frontend_model>Luma\Campaignmonitor\Block\Adminhtml\Config\TestApi</frontend_model>
+                    <comment>Test your credentials are correct and can connect to Campaign Monitor's API. Make sure to click Save Config after entering your API key before testing.</comment>
+                </field>                
+                <field id="logging" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Logging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Log Campaign Monitor extension information and API requests. Requires Magento logging to be enabled.</comment>
+                </field>
+                <field id="subscriber_synchronisation_enabled" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Batch Subscriber Synchronization</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If 'Yes', perform a nightly batch synchronization of list subscribers.</comment>
+                </field>
+                <field id="customer_attributes" translate="label comment" sortOrder="80" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Custom Field Mapping</label>
+                    <frontend_model>Luma\Campaignmonitor\Block\Adminhtml\Config\CustomerAttributes</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="debug" type="" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                <label>Developer</label>
+                <field id="version" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Version</label>
+                    <frontend_model>Luma\Campaignmonitor\Block\Adminhtml\Config\Version</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

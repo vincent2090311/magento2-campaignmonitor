@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="admin_system_config_changed_section_createsend_general">
+        <observer name="campaignmonitor_update_custom_field" instance="Luma\Campaignmonitor\Observer\UpdateCustomFields"/>
+    </event>
+    <event name="controller_action_predispatch_newsletter_subscriber_massUnsubscribe">
+        <observer name="campaignmonitor_update_user_massunsubscribe" instance="Luma\Campaignmonitor\Observer\MassUnsubscribeUsers"/>
+    </event>
+    <event name="controller_action_predispatch_newsletter_subscriber_massDelete">
+        <observer name="campaignmonitor_update_user_massdelete" instance="Luma\Campaignmonitor\Observer\MassUnsubscribeUsers"/>
+    </event>
+    <event name="customer_delete_before">
+        <observer name="campaignmonitor_customer_deleted" instance="Luma\Campaignmonitor\Observer\CustomerDeleted"/>
+    </event>
+    <event name="adminhtml_customer_save_after">
+        <observer name="campaignmonitor_check_subscription_status" instance="Luma\Campaignmonitor\Observer\CheckSubscription"/>
+    </event>
+</config>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="synchronise_subscribers_from_magento" instance="Luma\Campaignmonitor\Cron\SynchroniseFromMagento" method="execute">
+            <schedule>0 2 * * *</schedule>
+        </job>
+        <job name="synchronise_subscribers_from_campaignmonitor" instance="Luma\Campaignmonitor\Cron\SynchroniseFromCm" method="execute">
+            <schedule>0 3 * * *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,30 @@
+<?php /* @var $block \Luma\Campaignmonitor\Block\Adminhtml\Config\TestApi */ ?>
+
+<script>
+    require(['jquery'], function(jQuery){
+        var cmindicator = jQuery('#campaignmonitor_span');
+        jQuery('#test_api').click(function () {
+            cmindicator.find('.processing').show();
+            jQuery('#collect_message_span').text('');
+            jQuery.ajax({
+                url: '<?php echo $block->getAjaxUrl() ?>',
+                dataType: 'json',
+                data: {form_key: window.FORM_KEY},
+                type:'POST',                
+                success: function(response) {
+                    cmindicator.find('.processing').hide();
+                    var messages = '<div class="message message-'+response.status+' '+response.status+'">'+response.message+'</div>';
+                    cmindicator.find('.messages').html(messages).show();
+                    setTimeout(function(){ cmindicator.find('.messages').hide() }, 5000);
+                }
+            });
+        });
+
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>
+<span class="collect-indicator" id="campaignmonitor_span">
+    <img class="processing" hidden="hidden" alt="Collecting" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <div class="messages" style="display: none;"></div>
+</span>
