@@ -13,8 +13,6 @@
             "email": "vincent2090311@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {},
     "autoload": {
         "psr-4": {
             "Luma\\Campaignmonitor\\": ""
