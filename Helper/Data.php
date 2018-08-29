@@ -177,8 +177,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCustomFieldsConfig($storeId)
     {
-        $linkedAttributes = call_user_func_array('array_merge_recursive', @unserialize($this->scopeConfig->getValue(self::XML_PATH_M_TO_CM_ATTRIBUTES, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId)));
-        return array_unique($linkedAttributes['attributes']);
+        $fieldConfig = @unserialize($this->scopeConfig->getValue(self::XML_PATH_M_TO_CM_ATTRIBUTES, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId));
+        if (is_array($fieldConfig)) {
+            $linkedAttributes = call_user_func_array('array_merge_recursive', $fieldConfig);
+            return array_unique($linkedAttributes['attributes']);
+        }
+        return [];
     }
 
     /**
