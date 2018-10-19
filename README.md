@@ -15,7 +15,14 @@ This extension is entirely based on the official Campaign Monitor extension http
     $ php bin/magento cache:clean
     ```
 2. Via composer
-    composer require luma/module-campaignmonitor
+    + Run command : composer require luma/module-campaignmonitor
+    + Deploy content
+
+    ```
+    $ php bin/magento setup:upgrade 
+    $ php bin/magento setup:static-content:deploy
+    $ php bin/magento cache:clean
+    ```
 
 ## Usage
 
