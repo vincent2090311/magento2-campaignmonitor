@@ -4,15 +4,18 @@ This extension is entirely based on the official Campaign Monitor extension http
 
 ## Install
 
-+ Clone code from repository
-+ Copy content in folder src to your_installation_folder/app/code
-+ Run these commands 
+1. Via Github
+    + Clone code from repository
+    + Copy content in folder src to your_installation_folder/app/code/Luma/Campaignmonitor
+    + Run these commands 
 
-```
-$ php bin/magento setup:upgrade 
-$ php bin/magento setup:static-content:deploy
-$ php bin/magento cache:clean
-```
+    ```
+    $ php bin/magento setup:upgrade 
+    $ php bin/magento setup:static-content:deploy
+    $ php bin/magento cache:clean
+    ```
+2. Via composer
+    composer require luma/module-campaignmonitor
 
 ## Usage
 
