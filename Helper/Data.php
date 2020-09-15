@@ -144,7 +144,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getApiKey($storeId)
     {
-        return urlencode(trim($this->scopeConfig->getValue(self::XML_PATH_API_ID, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId)));
+        return trim($this->scopeConfig->getValue(self::XML_PATH_API_ID, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId));
     }
 
     /**
