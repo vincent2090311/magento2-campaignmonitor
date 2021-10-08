@@ -29,11 +29,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $canLog = null;
 
     /**
-     * @var \Zend\Log\Logger
-     */
-    protected $logger;
-
-    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
@@ -79,25 +74,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->customerFactory = $customerFactory;
         $this->subscriberFactory = $subscriberFactory;
         $this->customerAttributes = $customerAttributes;
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/' . self::LOGFILE);
-        $this->logger = new \Zend\Log\Logger();
-        $this->logger->addWriter($writer);
     }
     /**
-     * Logs all extension specific notices to a separate file
-     *
-     * @param string | array $message The message to log
-     * @param int $level The log level (defined in the Zend_Log class)
+     * @todo Zend_Log was removed in Magento 2.4.3
      */
     public function log($message)
     {
-        if ($this->canLog()) {
-	        if ( is_array( $message ) ) {
-		        $message = print_r( $message, true );
-	        }
-            $this->logger->info($message);
-        }
+        return;
     }
 
     /**
@@ -105,10 +88,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function canLog()
     {
-        if ($this->canLog === null) {
-            $this->canLog = $this->scopeConfig->getValue(self::XML_PATH_LOGGING, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        }
-        return $this->canLog;
+        return false;
     }
 
     /**
