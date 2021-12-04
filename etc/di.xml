@@ -7,4 +7,17 @@
             </argument>
         </arguments>
     </type>
+    <type name="Luma\Campaignmonitor\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Luma\Campaignmonitor\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">cmLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Luma\Campaignmonitor\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
