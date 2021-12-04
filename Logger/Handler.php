@@ -5,7 +5,10 @@
 
 namespace Luma\Campaignmonitor\Logger;
 
-class Handler
+use Magento\Framework\Logger\Handler\Base;
+use Monolog\Logger;
+
+class Handler extends Base
 {
     const LOGFILE = "campaignmonitor.log";
 
