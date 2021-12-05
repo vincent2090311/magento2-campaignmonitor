@@ -4,8 +4,6 @@ namespace Luma\Campaignmonitor\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const LOGFILE = "campaignmonitor.log";
-
     const XML_PATH_WEBHOOK_ID                        = 'createsend_general/api/webhook_id';
     const XML_PATH_LIST_ID                           = 'createsend_general/api/list_id';
     const XML_PATH_NEW_LIST_NAME                     = 'createsend_general/api/new_list_name';
@@ -29,7 +27,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $canLog = null;
 
     /**
-     * @var \Zend\Log\Logger
+     * @var  \Luma\Campaignmonitor\Logger\Logger
      */
     protected $logger;
 
@@ -70,7 +68,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Customer\Model\GroupFactory $customerGroupFactory,
         \Magento\Customer\Model\CustomerFactory $customerFactory,
         \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory,
-        \Luma\Campaignmonitor\Model\Config\CustomerAttributesFactory $customerAttributes
+        \Luma\Campaignmonitor\Model\Config\CustomerAttributesFactory $customerAttributes,
+        \Luma\Campaignmonitor\Logger\Logger $logger
     ) {
         parent::__construct($context);
         $this->storeManager = $storeManager;
@@ -79,10 +78,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->customerFactory = $customerFactory;
         $this->subscriberFactory = $subscriberFactory;
         $this->customerAttributes = $customerAttributes;
-
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/' . self::LOGFILE);
-        $this->logger = new \Zend\Log\Logger();
-        $this->logger->addWriter($writer);
+        $this->logger = $logger;
     }
     /**
      * Logs all extension specific notices to a separate file
@@ -144,7 +140,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getApiKey($storeId)
     {
-        return urlencode(trim($this->scopeConfig->getValue(self::XML_PATH_API_ID, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId)));
+        return trim($this->scopeConfig->getValue(self::XML_PATH_API_ID, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId));
     }
 
     /**
@@ -155,7 +151,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getApiClientId($storeId)
     {
-        return urlencode(trim($this->scopeConfig->getValue(self::XML_PATH_API_CLIENT_ID, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId)));
+        return trim($this->scopeConfig->getValue(self::XML_PATH_API_CLIENT_ID, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $storeId));
     }
 
     /**
