@@ -196,7 +196,7 @@ class CampaignMonitor
 
         $userAgent = sprintf(self::USER_AGENT_STRING, $mageVersion, $extVersion, $listId);
 
-        $response = $this->_callApi($authenticationMethod, $apiKey, $method, $endpoint, $postFields, $queryParams, $userAgent);
+        $response = $this->_callApi($authenticationMethod, $apiKey, $method, $endpoint, $userAgent, $postFields, $queryParams);
         if (!$response) {
             $data['data']['Message'] = 'An error occurred during the request.';
             return $data;
@@ -235,15 +235,15 @@ class CampaignMonitor
      * @param string $apiKeyOrToken The API key or OAuth Access Token required to make the API request
      * @param string $method The HTTP Method for the request. Valid methods are documented at the top of the class
      * @param string $endpoint The endpoint to make the request of
+     * @param string $userAgent HTTP User-Agent to use
      * @param array $postFields The fields that should be posted to the end point
      * @param array $queryParams Any query params that should be appended to the request
-     * @param string $userAgent HTTP User-Agent to use
      *
      * @return \Zend_Http_Response
      * @throws \Magento\Framework\Exception\LocalizedException if the method given is not an accepted method
      * @throws \Zend_Http_Client_Exception if something goes wrong during the connection
      */
-    protected function _callApi($authenticationMethod, $apiKey, $method, $endpoint, $postFields = [], $queryParams = [], $userAgent)
+    protected function _callApi($authenticationMethod, $apiKey, $method, $endpoint, $userAgent, $postFields = [], $queryParams = [])
     {
         /** @var Campaignmonitor_Createsend_Helper_Data $helper */
         $helper = $this->helperData;
