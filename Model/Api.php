@@ -19,9 +19,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::GET,
             "clients",
+            $storeId,
             [],
-            [],
-            $storeId
+            []
         );
 
         $clients = [];
@@ -69,9 +69,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::GET,
             "clients/{$clientId}/lists",
+            $storeId,
             [],
-            [],
-            $storeId
+            []
         );
 
         return $reply;
@@ -95,9 +95,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::GET,
             'lists/' . $listId,
+            $storeId,
             [],
-            [],
-            $storeId
+            []
         );
 
         return $reply;
@@ -133,9 +133,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::POST,
             'subscribers/' . $listId,
+            $storeId,
             $subscriberData,
-            [],
-            $storeId
+            []
         );
 
         return $reply;
@@ -156,9 +156,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::POST,
             "subscribers/{$listId}/unsubscribe",
+            $storeId,
             ['EmailAddress' => $email],
-            [],
-            $storeId
+            []
         );
 
         return $reply;
@@ -197,9 +197,9 @@ class Api extends CampaignMonitor
             $reply = $this->call(
                 \Zend_Http_Client::POST,
                 "lists/{$listId}/customfields",
+                $storeId,
                 $params,
-                [],
-                $storeId
+                []
             );
 
             if ($reply['success'] === false) {
@@ -227,9 +227,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::GET,
             "lists/{$listId}/active",
+            $storeId,
             [],
-            ['date' => $date],
-            $storeId
+            ['date' => $date]
         );
 
         return $reply;
@@ -248,9 +248,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::GET,
             "lists/{$listId}/unsubscribed",
+            $storeId,
             [],
-            ['date' => $date],
-            $storeId
+            ['date' => $date]
         );
 
         return $reply;
@@ -269,9 +269,9 @@ class Api extends CampaignMonitor
         $reply = $this->call(
             \Zend_Http_Client::GET,
             "lists/{$listId}/deleted",
+            $storeId,
             [],
-            ['date' => $date],
-            $storeId
+            ['date' => $date]
         );
 
         return $reply;
@@ -296,14 +296,14 @@ class Api extends CampaignMonitor
             $reply = $api->call(
                 \Zend_Http_Client::POST,
                 "subscribers/{$listId}/import",
+                $storeId,
                 [
                     'Subscribers'                            => $partialData,
                     'Resubscribe'                            => false,
                     'QueueSubscriptionBasedAutoResponders'   => false,
                     'RestartSubscriptionBasedAutoresponders' => true
                 ],
-                [],
-                $storeId
+                []
             );
         } while (
             $reply['success'] !== false

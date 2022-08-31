@@ -11,7 +11,7 @@ namespace Luma\Campaignmonitor\Model;
 class CampaignMonitor
 {
     const API_BASE_URL      = 'https://api.createsend.com/';
-    const API_PATH          = 'api/v3.1/';
+    const API_PATH          = 'api/v3.2/';
     const API_OAUTH_PATH    = 'oauth/';
 
     const CODE_SUBSCRIBER_NOT_IN_LIST = 203;
@@ -165,14 +165,13 @@ class CampaignMonitor
      * @param string $method The HTTP method to use. Accepted methods are defined at the top of this class and constants
      *                       are available in the Zend_Http_Client class.
      * @param string $endpoint The API endpoint to query; for example: lists/1eax88123c7cedasdas70fd05saxqwbf
+     * @param int $storeId The id of the store
      * @param array $postFields An array of fields to send the end point
      * @param array $queryParams An array of URI query parameters to append to the URI
-     * @param string $scope 'default' | 'websites' | 'stores'
-     * @param int $storeId The id of the store
      *
      * @return array|null
      */
-    public function call($method, $endpoint, $postFields = [], $queryParams = [], $storeId)
+    public function call($method, $endpoint, $storeId, $postFields = [], $queryParams = [])
     {
         /** @var array $data */
         $data = [
