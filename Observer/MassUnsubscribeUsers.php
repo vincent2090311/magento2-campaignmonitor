@@ -45,6 +45,9 @@ class MassUnsubscribeUsers implements \Magento\Framework\Event\ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $subscribers = $observer->getEvent()->getControllerAction()->getRequest()->getPost('subscriber');
+        if (!is_array($subscribers)) {
+            $subscribers = explode(',', $subscribers);
+        }
         foreach ($subscribers as $id) {
             /** @var \Magento\Newsletter\Model\Subscriber $newsletter */
             $newsletter = $this->subscriberFactory->create();
