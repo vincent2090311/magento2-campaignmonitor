@@ -11,7 +11,7 @@ namespace Luma\Campaignmonitor\Model;
 class CampaignMonitor
 {
     const API_BASE_URL      = 'https://api.createsend.com/';
-    const API_PATH          = 'api/v3.1/';
+    const API_PATH          = 'api/v3.2/';
     const API_OAUTH_PATH    = 'oauth/';
 
     const CODE_SUBSCRIBER_NOT_IN_LIST = 203;
@@ -165,14 +165,13 @@ class CampaignMonitor
      * @param string $method The HTTP method to use. Accepted methods are defined at the top of this class and constants
      *                       are available in the Zend_Http_Client class.
      * @param string $endpoint The API endpoint to query; for example: lists/1eax88123c7cedasdas70fd05saxqwbf
+     * @param int $storeId The id of the store
      * @param array $postFields An array of fields to send the end point
      * @param array $queryParams An array of URI query parameters to append to the URI
-     * @param string $scope 'default' | 'websites' | 'stores'
-     * @param int $storeId The id of the store
      *
      * @return array|null
      */
-    public function call($method, $endpoint, $postFields = [], $queryParams = [], $storeId)
+    public function call($method, $endpoint, $storeId, $postFields = [], $queryParams = [])
     {
         /** @var array $data */
         $data = [
@@ -197,7 +196,7 @@ class CampaignMonitor
 
         $userAgent = sprintf(self::USER_AGENT_STRING, $mageVersion, $extVersion, $listId);
 
-        $response = $this->_callApi($authenticationMethod, $apiKey, $method, $endpoint, $postFields, $queryParams, $userAgent);
+        $response = $this->_callApi($authenticationMethod, $apiKey, $method, $endpoint, $userAgent, $postFields, $queryParams);
         if (!$response) {
             $data['data']['Message'] = 'An error occurred during the request.';
             return $data;
@@ -236,15 +235,15 @@ class CampaignMonitor
      * @param string $apiKeyOrToken The API key or OAuth Access Token required to make the API request
      * @param string $method The HTTP Method for the request. Valid methods are documented at the top of the class
      * @param string $endpoint The endpoint to make the request of
+     * @param string $userAgent HTTP User-Agent to use
      * @param array $postFields The fields that should be posted to the end point
      * @param array $queryParams Any query params that should be appended to the request
-     * @param string $userAgent HTTP User-Agent to use
      *
      * @return \Zend_Http_Response
      * @throws \Magento\Framework\Exception\LocalizedException if the method given is not an accepted method
      * @throws \Zend_Http_Client_Exception if something goes wrong during the connection
      */
-    protected function _callApi($authenticationMethod, $apiKey, $method, $endpoint, $postFields = [], $queryParams = [], $userAgent)
+    protected function _callApi($authenticationMethod, $apiKey, $method, $endpoint, $userAgent, $postFields = [], $queryParams = [])
     {
         /** @var Campaignmonitor_Createsend_Helper_Data $helper */
         $helper = $this->helperData;
