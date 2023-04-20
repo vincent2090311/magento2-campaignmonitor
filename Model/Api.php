@@ -116,7 +116,8 @@ class Api extends CampaignMonitor
         $subscriberData = [
             'EmailAddress' => $email,
             'Resubscribe' => true,
-            'RestartSubscriptionBasedAutoresponders' => true
+            'RestartSubscriptionBasedAutoresponders' => true,
+            'ConsentToTrack' => 'Unchanged',
         ];
 
         $listId = $this->helperData->getListId($storeId);
