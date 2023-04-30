@@ -2,6 +2,8 @@
 
 This extension is entirely based on the official Campaign Monitor extension https://github.com/campaignmonitor/magento-extension. But this module can work with Magento2
 
+New package has been released to support magento 2.4.6 here https://github.com/vincent2090311/cm2
+
 ## Install
 
 1. Via Github
